@@ -25,6 +25,7 @@ function GetShow() {
   const [categoryPosts, setCategoryPosts] = useState([]);
   const [categories, setCategories] = useState([]);
 
+   // Use Effects
   useEffect(() => {
     if (id) {
       fetchPost();
@@ -47,6 +48,8 @@ function GetShow() {
 
     fetchData();
   }, [id, selectedCategory]);
+  
+  // Get Post
 
   const fetchPost = async () => {
     setCategoryPosts([]); // Kategori gönderilerini sıfırla
@@ -67,6 +70,8 @@ function GetShow() {
       console.error('Error fetching post:', error);
     }
   };
+
+  // Categories
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -92,7 +97,7 @@ function GetShow() {
     }
   };
   
-
+  // Edit Post
   const handleEdit = async (updatedData) => {
     try {
       await axiosapi.post(`http://127.0.0.1:8000/api/update/${id}`, updatedData);
@@ -117,9 +122,13 @@ function GetShow() {
     setShowModal(!showModal);
   };
 
+  // Loading
+
   if (!post) {
     return <div>Loading...</div>;
   }
+
+  // Orientation
 
   const handleGoBack = () => {
     router.push('/posts');
@@ -261,7 +270,8 @@ function GetShow() {
   );
 }
 
-
+ // Update Post
+ 
 function EditPostForm({ post, onEdit, onCancel }) {
   const [title, setTitle] = useState(post.title);
   const [content, setContent] = useState(post.content);
