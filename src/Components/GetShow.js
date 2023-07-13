@@ -270,7 +270,7 @@ function GetShow() {
   );
 }
 
- // Update Posttt
+ // Update Post
  
 function EditPostForm({ post, onEdit, onCancel }) {
   const [title, setTitle] = useState(post.title);
