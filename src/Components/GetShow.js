@@ -26,6 +26,7 @@ function GetShow() {
   const [categories, setCategories] = useState([]);
 
    // Use Effects
+   
   useEffect(() => {
     if (id) {
       fetchPost();
@@ -98,6 +99,7 @@ function GetShow() {
   };
   
   // Edit Post
+
   const handleEdit = async (updatedData) => {
     try {
       await axiosapi.post(`http://127.0.0.1:8000/api/update/${id}`, updatedData);
@@ -220,7 +222,7 @@ function GetShow() {
                   
                   <Link
                     key={categoryPost.id}
-                    href={`/detail?id=${categoryPost.id}&category=${selectedCategory}` }
+                    href={`/detail?id=${categoryPost.id}` }
                     className="btn nav-link col-12"
                   >
                     <button className="btn nav-link col-12">{categoryPost.title}</button>

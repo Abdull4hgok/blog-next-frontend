@@ -18,9 +18,7 @@ function GetPosts() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
   const [allPosts, setAllPosts] = useState([]);
   const [newPostData, setNewPostData] = useState({
     title: '',
@@ -79,15 +77,6 @@ function GetPosts() {
 
   //Categories
 
-  const filterPosts = () => {
-    if (selectedCategory === '') {
-      setPosts(allPosts);
-    } else {
-      const filtered = allPosts.filter((post) => post.category === selectedCategory);
-      setPosts(filtered);
-    }
-  };
-
   const fetchCategories = async () => {
     try {
       const response = await axiosapi.get('http://127.0.0.1:8000/api/get-categories');
@@ -98,6 +87,16 @@ function GetPosts() {
     }
   };
 
+  const filterPosts = () => {
+    if (selectedCategory === '') {
+      setPosts(allPosts);
+    } else {
+      const filtered = allPosts.filter((post) => post.category === selectedCategory);
+      setPosts(filtered);
+    }
+  };
+
+
   const handleCategoryFilter = async (category) => {
     setSelectedCategory(category);
 
@@ -107,7 +106,7 @@ function GetPosts() {
       });
       console.log(response.data.data);
       setFilteredPosts(response.data.data);
-      const filteredUrl = `posts/?id=category=${category}`;
+      const filteredUrl = `posts/?category=${category}`;
       router.push(filteredUrl);
     } catch (error) {
       console.error('Gönderiler getirilirken hata oluştu:', error);
