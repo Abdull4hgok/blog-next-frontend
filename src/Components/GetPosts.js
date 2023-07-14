@@ -61,7 +61,7 @@ function GetPosts() {
 
   const fetchPosts = async () => {
     try {
-      const response = await axiosapi.get('http://127.0.0.1:8000/api/posts', {
+      const response = await axiosapi.get('/posts', {
         params: { page: currentPage, perPage, category: selectedCategory },
       });
       console.log(response.data.data);
@@ -79,7 +79,7 @@ function GetPosts() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axiosapi.get('http://127.0.0.1:8000/api/get-categories');
+      const response = await axiosapi.get('/get-categories');
       console.log(response.data);
       setCategories(response.data);
     } catch (error) {
@@ -101,7 +101,7 @@ function GetPosts() {
     setSelectedCategory(category);
 
     try {
-      const response = await axiosapi.get('http://127.0.0.1:8000/api/posts', {
+      const response = await axiosapi.get('/posts', {
         params: { category, page: 1, perPage },
       });
       console.log(response.data.data);
@@ -118,7 +118,7 @@ function GetPosts() {
     sessionStorage.removeItem('selectedCategory'); // sessionStorage'dan seçili kategoriyi sil
 
     try {
-      const response = await axiosapi.get('http://127.0.0.1:8000/api/posts', {
+      const response = await axiosapi.get('/posts', {
         params: { page: 1, perPage }, // category parametresini boş olarak gönder
       });
       console.log(response.data.data);
@@ -154,7 +154,7 @@ function GetPosts() {
       });
 
       if (confirmed.isConfirmed) {
-        await axiosapi.get(`http://127.0.0.1:8000/api/delete/${postId}`);
+        await axiosapi.get(`/delete/${postId}`);
         console.log('Post deleted');
 
         setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
@@ -184,7 +184,7 @@ function GetPosts() {
     const categoryId = parseInt(selectedCategory);
 
     try {
-      await axiosapi.post('http://127.0.0.1:8000/api/add', {
+      await axiosapi.post('/add', {
         ...newPostData,
         categoryId: categoryId,
       });
@@ -226,7 +226,7 @@ function GetPosts() {
     setSearchTerm(searchValue);
 
     try {
-      const response = await axiosapi.get('http://127.0.0.1:8000/api/search', {
+      const response = await axiosapi.get('/search', {
         params: {
           term: searchValue,
           page: page, // Sayfa numarasını gönder

@@ -26,7 +26,7 @@ function GetShow() {
   const [categories, setCategories] = useState([]);
 
    // Use Effects
-   
+
   useEffect(() => {
     if (id) {
       fetchPost();
@@ -56,13 +56,13 @@ function GetShow() {
     setCategoryPosts([]); // Kategori gönderilerini sıfırla
   
     try {
-      const response = await axiosapi.get(`http://127.0.0.1:8000/api/detail/${id}`);
+      const response = await axiosapi.get(`/detail/${id}`);
       console.log(response.data);
       setPost(response.data);
   
       if (response.data.categoryId) {
         const categoryId = response.data.categoryId;
-        const categoryResponse = await axiosapi.get('http://127.0.0.1:8000/api/posts', {
+        const categoryResponse = await axiosapi.get('/posts', {
           params: { page: 1, perPage: 10, category: categoryId },
         });
         setCategoryPosts(categoryResponse.data.data);
@@ -77,7 +77,7 @@ function GetShow() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axiosapi.get('http://127.0.0.1:8000/api/get-categories');
+        const response = await axiosapi.get('/get-categories');
         setCategories(response.data);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -89,7 +89,7 @@ function GetShow() {
 
   const fetchCategoryPosts = async () => {
     try {
-      const response = await axiosapi.get('http://127.0.0.1:8000/api/posts', {
+      const response = await axiosapi.get('/posts', {
         params: { page: 1, perPage: 10, category: selectedCategory },
       });
       setCategoryPosts(response.data.data);
@@ -102,7 +102,7 @@ function GetShow() {
 
   const handleEdit = async (updatedData) => {
     try {
-      await axiosapi.post(`http://127.0.0.1:8000/api/update/${id}`, updatedData);
+      await axiosapi.post(`/update/${id}`, updatedData);
       console.log('Post edited');
       setPost(updatedData);
       setIsEditing(false);

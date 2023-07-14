@@ -1,10 +1,11 @@
 import axios from "axios";
 
 export const axiosapi  =  axios.create({
-    baseURL: 'localhost',
+    baseURL: process.env.API_URL,
     headers: {
         'content-type': 'application/json',
         'Accept': 'application/json',
+        
        
         
     }

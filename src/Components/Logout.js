@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 const Logout = ({ onLogout }) => {
   const getLogout = () => {
     axiosapi
-      .post('http://127.0.0.1:8000/api/logout')
+      .post('/logout')
       .then((response) => {
         localStorage.removeItem('token');
         Swal.fire({

@@ -11,7 +11,7 @@ function Login({ onLogin }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/login', { email, password });
+      const response = await axios.post(process.env.API_URL+'/login', { email, password });
       Swal.fire({
         icon: "success",
         text:['Login Successfull.']

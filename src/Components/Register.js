@@ -19,7 +19,7 @@ function Register({ onRegister }) {
     // Handle validations
 
     axios
-      .post("http://127.0.0.1:8000/api/register", {
+      .post(process.env.API_URL+"/register", {
         name,
         email,
         password,
