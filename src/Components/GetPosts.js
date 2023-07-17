@@ -58,7 +58,6 @@ function GetPosts() {
   }, [router.query]);
 
    // Get Posts
-
   const fetchPosts = async () => {
     try {
       const response = await axiosapi.get('/posts', {

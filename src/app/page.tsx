@@ -22,7 +22,6 @@ export default function Home() {
   const [isRegistered, setIsRegistered] = useState(false);
   const [shouldShowLogin, setShouldShowLogin] = useState(false);
   const [showModal, setShowModal] = useState(false);
-console.log(process.env.customKey);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
